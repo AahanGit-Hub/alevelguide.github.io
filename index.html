@@ -4,152 +4,1690 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cambridge AS & A Level Study Guide 2025-2026 - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
       --dark-blue: #002147;
-      --dark-red: #8B0000;
-      /* White is used as a neutral background where needed */
-      --background: #ffffff;
-      --text-neutral: #ffffff;
+      --light-blue: #1e3a8a;
+      --accent-color: #3498db;
+      --success-color: #27ae60;
+      --warning-color: #f39c12;
+      --background: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-primary: #333333;
+      --text-secondary: #666666;
+      --text-light: #ffffff;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
+      --shadow-lg: 0 8px 16px rgba(0,0,0,0.15);
+      --transition-fast: 0.2s ease;
+      --transition-normal: 0.3s ease;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
     }
-    html { scroll-behavior: smooth; }
-    body {
+    
+    /* Dark mode */
+    .dark-mode {
+      --dark-blue: #141e30;
+      --light-blue: #243b55;
+      --accent-color: #3498db;
+      --success-color: #2ecc71;
+      --warning-color: #f1c40f;
+      --background: #121212;
+      --card-bg: #1e1e1e;
+      --text-primary: #f0f0f0;
+      --text-secondary: #bbbbbb;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 8px rgba(0,0,0,0.35);
+      --shadow-lg: 0 8px 16px rgba(0,0,0,0.4);
+    }
+    
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 70px;
+    }
+    
+    body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--background);
-      color: var(--dark-blue);
+      color: var(--text-primary);
+      line-height: 1.6;
     }
+    
+    /* Header styles */
     header {
-      background-color: var(--dark-blue);
-      padding: 20px;
+      background: linear-gradient(135deg, var(--dark-blue), var(--light-blue));
+      padding: 30px 20px;
       text-align: center;
-      color: var(--text-neutral);
+      color: var(--text-light);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
     }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://via.placeholder.com/1500x500') center/cover;
+      opacity: 0.1;
+      z-index: 0;
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 1;
+    }
+    
     header img {
-      max-height: 70px;
+      max-height: 80px;
       vertical-align: middle;
-      margin-right: 10px;
-      animation: slideIn 1s ease-in-out;
+      margin-right: 15px;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
     }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
     header h1 {
       display: inline-block;
-      font-size: 2em;
+      font-size: 2.4em;
       margin: 0;
-      animation: fadeIn 1s ease-in-out;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+    
+    header p {
+      max-width: 800px;
+      margin: 20px auto 0;
+      font-size: 1.1em;
+      opacity: 0.9;
     }
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
+    
+    /* Navigation styles */
     nav {
       background-color: var(--dark-blue);
       display: flex;
       justify-content: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      margin-bottom: 30px;
+      box-shadow: var(--shadow-md);
       position: sticky;
       top: 0;
       z-index: 1000;
+      padding: 0 20px;
     }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1400px;
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+    
     nav a {
-      padding: 15px 20px;
+      padding: 20px 15px;
       text-decoration: none;
-      color: var(--text-neutral);
-      font-weight: bold;
-      transition: color 0.3s;
+      color: var(--text-light);
+      font-weight: 600;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all var(--transition-fast);
     }
-    nav a:hover { color: var(--dark-red); }
+    
+    nav a:hover {
+      color: var(--accent-color);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--accent-color);
+      transition: width var(--transition-normal);
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    .nav-icons {
+      display: flex;
+      align-items: center;
+    }
+    
+    .icon-btn {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.2em;
+      padding: 10px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    
+    .icon-btn:hover {
+      color: var(--accent-color);
+      transform: scale(1.1);
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+    
+    /* Main container */
     .container {
       max-width: 1200px;
-      margin: auto;
-      padding: 20px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
-    .subject-card {
-      background-color: var(--background);
-      border: 2px solid var(--dark-blue);
-      border-radius: 10px;
-      padding: 20px;
+    
+    /* Hero section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px;
+      background-color: var(--card-bg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(155, 89, 182, 0.1));
+      z-index: 0;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+    
+    .hero h2 {
+      font-size: 2.5em;
       margin-bottom: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      transition: transform 0.3s, box-shadow 0.3s;
+      color: var(--dark-blue);
     }
-    .subject-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    
+    .hero p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      color: var(--text-secondary);
     }
-    .subject-card h2 { margin-top: 0; }
-    .subject-card a {
+    
+    .btn {
       display: inline-block;
-      margin-top: 10px;
-      padding: 10px 15px;
-      background-color: var(--dark-red);
-      color: var(--text-neutral);
-      border-radius: 25px;
+      padding: 12px 24px;
+      background-color: var(--accent-color);
+      color: var(--text-light);
+      border-radius: 30px;
       text-decoration: none;
-      transition: background-color 0.3s, transform 0.3s;
+      font-weight: bold;
+      transition: all var(--transition-normal);
+      box-shadow: var(--shadow-sm);
     }
-    .subject-card a:hover {
-      background-color: var(--dark-red);
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      background-color: #2980b9;
+    }
+    
+    /* Subject cards grid */
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .subject-card {
+      background-color: var(--card-bg);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-normal);
+      position: relative;
+    }
+    
+    .subject-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .card-header {
+      padding: 20px;
+      background: linear-gradient(135deg, var(--dark-blue), var(--light-blue));
+      color: var(--text-light);
+      position: relative;
+    }
+    
+    .card-header i {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2em;
+      opacity: 0.7;
+    }
+    
+    .card-content {
+      padding: 20px;
+    }
+    
+    .card-content p {
+      margin-bottom: 20px;
+      color: var(--text-secondary);
+    }
+    
+    .card-footer {
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .explore-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--accent-color);
+      color: var(--text-light);
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all var(--transition-normal);
+    }
+    
+    .explore-btn:hover {
+      background-color: #2980b9;
       transform: scale(1.05);
     }
-    footer {
-      background-color: var(--dark-blue);
-      color: var(--text-neutral);
+    
+    .resource-badge {
+      background-color: var(--success-color);
+      color: white;
+      font-size: 0.8em;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+    
+    /* Features section */
+    .features {
+      margin: 60px 0;
+    }
+    
+    .section-title {
       text-align: center;
-      padding: 15px;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background-color: var(--accent-color);
+      margin: 15px auto 0;
+      border-radius: 2px;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    
+    .feature-card {
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      transition: all var(--transition-normal);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .feature-icon {
+      font-size: 2.5em;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+    }
+    
+    .feature-card h3 {
+      margin-bottom: 15px;
+      font-size: 1.4em;
+    }
+    
+    /* Upcoming events */
+    .events {
+      margin: 60px 0;
+    }
+    
+    .event-card {
+      display: flex;
+      background-color: var(--card-bg);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: all var(--transition-normal);
+    }
+    
+    .event-card:hover {
+      transform: translateX(5px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .event-date {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-width: 100px;
+      padding: 20px;
+      background-color: var(--accent-color);
+      color: var(--text-light);
+    }
+    
+    .event-date .day {
+      font-size: 2em;
+      font-weight: bold;
+    }
+    
+    .event-date .month {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    
+    .event-details {
+      padding: 20px;
+      flex-grow: 1;
+    }
+    
+    .event-details h3 {
+      margin-bottom: 10px;
+    }
+    
+    .event-details p {
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+    }
+    
+    /* Newsletter */
+    .newsletter {
+      background-color: var(--card-bg);
+      padding: 40px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      margin: 60px 0;
+    }
+    
+    .newsletter h2 {
+      margin-bottom: 20px;
+    }
+    
+    .newsletter p {
+      max-width: 600px;
+      margin: 0 auto 30px;
+      color: var(--text-secondary);
+    }
+    
+    .newsletter-form {
+      display: flex;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .newsletter-form input {
+      flex-grow: 1;
+      padding: 12px 20px;
+      border: 1px solid #ddd;
+      border-radius: 30px 0 0 30px;
+      font-size: 1em;
+      outline: none;
+    }
+    
+    .newsletter-form button {
+      padding: 12px 25px;
+      background-color: var(--accent-color);
+      color: var(--text-light);
+      border: none;
+      border-radius: 0 30px 30px 0;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color var(--transition-fast);
+    }
+    
+    .newsletter-form button:hover {
+      background-color: #2980b9;
+    }
+    
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, var(--dark-blue), var(--light-blue));
+      color: var(--text-light);
+      padding: 60px 0 30px;
+      margin-top: 80px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .footer-column h3 {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: var(--accent-color);
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-column a {
+      color: #bbb;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+    
+    .footer-column a:hover {
+      color: var(--accent-color);
+    }
+    
+    .footer-column p {
+      color: #bbb;
+      margin-bottom: 15px;
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .footer-social a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 36px;
+      height: 36px;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      color: var(--text-light);
+      transition: all var(--transition-normal);
+    }
+    
+    .footer-social a:hover {
+      background-color: var(--accent-color);
+      transform: translateY(-3px);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 40px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
       font-size: 0.9em;
+      opacity: 0.7;
+    }
+    
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: var(--accent-color);
+      color: var(--text-light);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      font-size: 1.5em;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-normal);
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background-color: #2980b9;
+      transform: translateY(-5px);
+    }
+    
+    /* Academic calendar */
+    .calendar {
+      margin: 60px 0;
+    }
+    
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .calendar-controls {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .calendar-controls button {
+      background-color: var(--card-bg);
+      border: 1px solid #ddd;
+      border-radius: var(--radius-sm);
+      padding: 8px 15px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    
+    .calendar-controls button:hover {
+      background-color: var(--accent-color);
+      color: var(--text-light);
+      border-color: var(--accent-color);
+    }
+    
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+    
+    .calendar-day-name {
+      text-align: center;
+      font-weight: bold;
+      padding: 10px;
+    }
+    
+    .calendar-date {
+      height: 100px;
+      background-color: var(--card-bg);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .calendar-date.has-event {
+      border-left: 4px solid var(--accent-color);
+    }
+    
+    .date-number {
+      font-weight: bold;
+    }
+    
+    .event-indicator {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .nav-links {
+        flex-direction: column;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height var(--transition-normal);
+      }
+      
+      .nav-links.active {
+        max-height: 300px;
+      }
+      
+      .nav-icons {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+      }
+      
+      .event-card {
+        flex-direction: column;
+      }
+      
+      .event-date {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+      
+      .newsletter-form {
+        flex-direction: column;
+      }
+      
+      .newsletter-form input,
+      .newsletter-form button {
+        width: 100%;
+        border-radius: 30px;
+        margin-bottom: 10px;
+      }
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 1s forwards;
+    }
+    
+    .animated {
+      opacity: 0;
+    }
+
+    /* Enhanced Calendar Styles */
+    .calendar {
+      margin: 60px 0;
+    }
+
+    .calendar-container {
+      background-color: var(--card-bg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .month-selector {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .month-selector h3 {
+      margin: 0;
+      font-size: 1.3em;
+    }
+
+    .month-nav-btn {
+      background: none;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .month-nav-btn:hover {
+      background-color: rgba(0,0,0,0.1);
+    }
+
+    .calendar-controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    .calendar-btn {
+      background: none;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 20px;
+      padding: 8px 15px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .calendar-btn:hover {
+      background-color: rgba(0,0,0,0.05);
+    }
+
+    .calendar-btn.active {
+      background-color: var(--accent-color);
+      color: var(--text-light);
+      border-color: var(--accent-color);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding: 10px;
+    }
+
+    .calendar-day-name {
+      text-align: center;
+      font-weight: bold;
+      padding: 10px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .calendar-date {
+      min-height: 100px;
+      padding: 8px;
+      border: 1px solid rgba(0,0,0,0.05);
+      position: relative;
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .calendar-date:hover {
+      background-color: rgba(0,0,0,0.02);
+    }
+
+    .calendar-date.today {
+      background-color: rgba(52, 152, 219, 0.1);
+      border: 1px dashed var(--accent-color);
+    }
+
+    .prev-month, .next-month {
+      opacity: 0.4;
+    }
+
+    .date-number {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      text-align: center;
+      line-height: 24px;
+      border-radius: 50%;
+    }
+
+    .today .date-number {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
+    .calendar-event {
+      font-size: 0.8em;
+      padding: 3px 6px;
+      border-radius: 3px;
+      margin-top: 5px;
+      color: white;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .calendar-event:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .event-time {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .calendar-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 15px 20px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9em;
+    }
+
+    .legend-color {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    .upcoming-events-preview {
+      padding: 20px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .upcoming-events-preview h4 {
+      margin-bottom: 15px;
+      color: var(--text-primary);
+    }
+
+    .event-preview {
+      display: flex;
+      gap: 15px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .event-preview-date {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 50px;
+      background-color: var(--accent-color);
+      color: white;
+      border-radius: var(--radius-sm);
+      padding: 8px;
+    }
+
+    .event-preview-date .event-month {
+      font-size: 0.7em;
+      font-weight: bold;
+    }
+
+    .event-preview-date .event-day {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .event-preview-details {
+      flex: 1;
+    }
+
+    .event-preview-details h5 {
+      margin: 0 0 5px 0;
+      color: var (--text-primary);
+    }
+
+    .event-preview-details p {
+      margin: 0 0 3px 0;
+      color: var(--text-secondary);
+      font-size: 0.9em;
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 0.9em;
+      margin-top: 15px;
+    }
+
+    /* Dark mode adjustments */
+    .dark-mode .calendar-container {
+      background-color: var(--card-bg);
+    }
+
+    .dark-mode .calendar-header {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .dark-mode .calendar-date {
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .dark-mode .calendar-date:hover {
+      background-color: rgba(255,255,255,0.05);
+    }
+
+    .dark-mode .calendar-date.today {
+      background-color: rgba(52, 152, 219, 0.2);
+      border: 1px dashed var(--accent-color);
+    }
+
+    .dark-mode .calendar-btn {
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .dark-mode .calendar-btn:hover {
+      background-color: rgba(255,255,255,0.05);
+    }
+
+    .dark-mode .calendar-legend,
+    .dark-mode .upcoming-events-preview {
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .dark-mode .event-preview {
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* Responsive calendar */
+    @media (max-width: 768px) {
+      .calendar-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+
+      .calendar-grid {
+        font-size: 0.9em;
+      }
+
+      .calendar-date {
+        min-height: 80px;
+        padding: 5px;
+      }
+
+      .calendar-event {
+        font-size: 0.7em;
+        padding: 2px 4px;
+      }
+
+      .calendar-legend {
+        flex-direction: column;
+        gap: 10px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <!-- Use the official Cambridge logo (update src as needed) -->
-    <img src="cambridge.png" alt="Cambridge Logo">
-    <h1>Cambridge AS & A Level Study Guide 2025-2026</h1>
+    <div class="header-content">
+      <img src="cambridge.png" alt="Cambridge Logo">
+      <h1>Cambridge AS & A Level Study Guide</h1>
+      <p>Your comprehensive resource for the 2025-2026 academic year</p>
+    </div>
   </header>
   
   <nav>
-    <a href="english.html">English Language (AS)</a>
-    <a href="chemistry.html">Chemistry</a>
-    <a href="physics.html">Physics</a>
-    <a href="cs.html">Computer Science</a>
-    <a href="math.html">Mathematics</a>
+    <div class="nav-container">
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#subjects"><i class="fas fa-book"></i> Subjects</a></li>
+        <li><a href="#resources"><i class="fas fa-file-alt"></i> Resources</a></li>
+        <li><a href="#calendar"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+        <li><a href="#events"><i class="fas fa-calendar-day"></i> Events</a></li>
+        <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+      </ul>
+      <div class="nav-icons">
+        <button class="icon-btn" id="search-btn">
+          <i class="fas fa-search"></i>
+        </button>
+        <button class="icon-btn" id="theme-toggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
   </nav>
   
   <div class="container">
-    <div class="subject-card">
-      <h2>English Language (AS)</h2>
-      <p>Enhance your skills in language analysis, comprehension, and creative writing.</p>
-      <a href="english.html">Explore English Language</a>
-    </div>
-    <div class="subject-card">
-      <h2>Chemistry</h2>
-      <p>Dive deep into atomic structure, chemical reactions, and practical laboratory techniques.</p>
-      <a href="chemistry.html">Explore Chemistry</a>
-    </div>
-    <div class="subject-card">
-      <h2>Physics</h2>
-      <p>Understand the laws of motion, energy, and modern physics through theory and experiments.</p>
-      <a href="physics.html">Explore Physics</a>
-    </div>
-    <div class="subject-card">
-      <h2>Computer Science</h2>
-      <p>Develop computational thinking, programming skills, and system analysis expertise.</p>
-      <a href="cs.html">Explore Computer Science</a>
-    </div>
-    <div class="subject-card">
-      <h2>Mathematics</h2>
-      <p>Improve your analytical skills with in-depth study of algebra, calculus, and statistics.</p>
-      <a href="math.html">Explore Mathematics</a>
-    </div>
+    <section class="hero fade-in">
+      <div class="hero-content">
+        <h2>Your Path to Academic Excellence</h2>
+        <p>
+          Access comprehensive study materials, practice papers, and expert guidance to excel in your Cambridge AS & A Level examinations.
+        </p>
+        <a href="#subjects" class="btn">Explore Subjects</a>
+      </div>
+    </section>
+    
+    <section id="subjects" class="fade-in">
+      <div class="section-title">
+        <h2>Discover Our Subjects</h2>
+      </div>
+      <div class="subject-grid">
+        <div class="subject-card animated">
+          <div class="card-header">
+            <h3>English Language (AS)</h3>
+            <i class="fas fa-language"></i>
+          </div>
+          <div class="card-content">
+            <p>Enhance your skills in language analysis, comprehension, and creative writing.</p>
+          </div>
+          <div class="card-footer">
+            <a href="english.html" class="explore-btn">Explore</a>
+            <span class="resource-badge">12 Resources</span>
+          </div>
+        </div>
+        
+        <div class="subject-card animated">
+          <div class="card-header">
+            <h3>Chemistry</h3>
+            <i class="fas fa-flask"></i>
+          </div>
+          <div class="card-content">
+            <p>Dive deep into atomic structure, chemical reactions, and practical laboratory techniques.</p>
+          </div>
+          <div class="card-footer">
+            <a href="chemistry.html" class="explore-btn">Explore</a>
+            <span class="resource-badge">15 Resources</span>
+          </div>
+        </div>
+        
+        <div class="subject-card animated">
+          <div class="card-header">
+            <h3>Physics</h3>
+            <i class="fas fa-atom"></i>
+          </div>
+          <div class="card-content">
+            <p>Understand the laws of motion, energy, and modern physics through theory and experiments.</p>
+          </div>
+          <div class="card-footer">
+            <a href="physics.html" class="explore-btn">Explore</a>
+            <span class="resource-badge">14 Resources</span>
+          </div>
+        </div>
+        
+        <div class="subject-card animated">
+          <div class="card-header">
+            <h3>Computer Science</h3>
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <div class="card-content">
+            <p>Develop computational thinking, programming skills, and system analysis expertise.</p>
+          </div>
+          <div class="card-footer">
+            <a href="cs.html" class="explore-btn">Explore</a>
+            <span class="resource-badge">10 Resources</span>
+          </div>
+        </div>
+        
+        <div class="subject-card animated">
+          <div class="card-header">
+            <h3>Mathematics</h3>
+            <i class="fas fa-square-root-alt"></i>
+          </div>
+          <div class="card-content">
+            <p>Improve your analytical skills with in-depth study of algebra, calculus, and statistics.</p>
+          </div>
+          <div class="card-footer">
+            <a href="math.html" class="explore-btn">Explore</a>
+            <span class="resource-badge">18 Resources</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="features" class="features fade-in">
+      <div class="section-title">
+        <h2>Study Platform Features</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card animated">
+          <div class="feature-icon">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <h3>Past Papers</h3>
+          <p>Access a comprehensive collection of past exam papers with detailed mark schemes.</p>
+        </div>
+        
+        <div class="feature-card animated">
+          <div class="feature-icon">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <h3>Study Notes</h3>
+          <p>High-quality notes covering all syllabus topics and key concepts.</p>
+        </div>
+        
+        <div class="feature-card animated">
+          <div class="feature-icon">
+            <i class="fas fa-tasks"></i>
+          </div>
+          <h3>Progress Tracking</h3>
+          <p>Monitor your preparation with detailed analytics and performance metrics.</p>
+        </div>
+        
+        <div class="feature-card animated">
+          <div class="feature-icon">
+            <i class="fas fa-question-circle"></i>
+          </div>
+          <h3>Practice Questions</h3>
+          <p>Thousands of topic-wise questions with instant feedback and solutions.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section id="events" class="events fade-in">
+      <div class="section-title">
+        <h2>Upcoming Events</h2>
+      </div>
+      
+      <div class="event-card animated">
+        <div class="event-date">
+          <span class="day">15</span>
+          <span class="month">Mar</span>
+        </div>
+        <div class="event-details">
+          <h3>Physics Revision Workshop</h3>
+          <p>Interactive session covering key topics and exam techniques for Paper 1 & 2.</p>
+          <a href="#" class="btn">Register Now</a>
+        </div>
+      </div>
+      
+      <div class="event-card animated">
+        <div class="event-date">
+          <span class="day">22</span>
+          <span class="month">Mar</span>
+        </div>
+        <div class="event-details">
+          <h3>Chemistry Lab Techniques Webinar</h3>
+          <p>Live demonstration of practical experiments and techniques required for the exam.</p>
+          <a href="#" class="btn">Register Now</a>
+        </div>
+      </div>
+      
+      <div class="event-card animated">
+        <div class="event-date">
+          <span class="day">28</span>
+          <span class="month">Mar</span>
+        </div>
+        <div class="event-details">
+          <h3>English Language Writing Workshop</h3>
+          <p>Masterclass on advanced writing techniques and language analysis skills.</p>
+          <a href="#" class="btn">Register Now</a>
+        </div>
+      </div>
+    </section>
+    
+    <section id="calendar" class="calendar fade-in">
+      <div class="section-title">
+        <h2>Academic Calendar</h2>
+      </div>
+      
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <div class="month-selector">
+            <button class="month-nav-btn"><i class="fas fa-chevron-left"></i></button>
+            <h3>March 2025</h3>
+            <button class="month-nav-btn"><i class="fas fa-chevron-right"></i></button>
+          </div>
+          <div class="calendar-controls">
+            <button class="calendar-btn active">Month</button>
+            <button class="calendar-btn">Week</button>
+            <button class="calendar-btn">Today</button>
+          </div>
+        </div>
+
+        <div class="calendar-grid">
+          <div class="calendar-day-name">Mon</div>
+          <div class="calendar-day-name">Tue</div>
+          <div class="calendar-day-name">Wed</div>
+          <div class="calendar-day-name">Thu</div>
+          <div class="calendar-day-name">Fri</div>
+          <div class="calendar-day-name">Sat</div>
+          <div class="calendar-day-name">Sun</div>
+          
+          <!-- Previous month dates (greyed out) -->
+          <div class="calendar-date prev-month"><span class="date-number">24</span></div>
+          <div class="calendar-date prev-month"><span class="date-number">25</span></div>
+          <div class="calendar-date prev-month"><span class="date-number">26</span></div>
+          <div class="calendar-date prev-month"><span class="date-number">27</span></div>
+          <div class="calendar-date prev-month"><span class="date-number">28</span></div>
+          
+          <!-- Current month dates -->
+          <div class="calendar-date"><span class="date-number">1</span></div>
+          <div class="calendar-date"><span class="date-number">2</span></div>
+          <div class="calendar-date"><span class="date-number">3</span></div>
+          <div class="calendar-date"><span class="date-number">4</span></div>
+          <div class="calendar-date"><span class="date-number">5</span></div>
+          <div class="calendar-date"><span class="date-number">6</span></div>
+          <div class="calendar-date"><span class="date-number">7</span></div>
+          <div class="calendar-date"><span class="date-number">8</span></div>
+          <div class="calendar-date"><span class="date-number">9</span></div>
+          
+          <div class="calendar-date has-event">
+            <span class="date-number">10</span>
+            <div class="calendar-event" style="background-color: #3498db;">
+              <span class="event-time">10:00</span>
+              <span class="event-title">Mock Exams Start</span>
+            </div>
+          </div>
+          
+          <div class="calendar-date"><span class="date-number">11</span></div>
+          <div class="calendar-date"><span class="date-number">12</span></div>
+          <div class="calendar-date"><span class="date-number">13</span></div>
+          <div class="calendar-date"><span class="date-number">14</span></div>
+          
+          <div class="calendar-date has-event today">
+            <span class="date-number">15</span>
+            <div class="calendar-event" style="background-color: #e74c3c;">
+              <span class="event-time">14:30</span>
+              <span class="event-title">Physics Workshop</span>
+            </div>
+          </div>
+          
+          <div class="calendar-date"><span class="date-number">16</span></div>
+          <div class="calendar-date"><span class="date-number">17</span></div>
+          <div class="calendar-date"><span class="date-number">18</span></div>
+          <div class="calendar-date"><span class="date-number">19</span></div>
+          <div class="calendar-date"><span class="date-number">20</span></div>
+          <div class="calendar-date"><span class="date-number">21</span></div>
+          
+          <div class="calendar-date has-event">
+            <span class="date-number">22</span>
+            <div class="calendar-event" style="background-color: #2ecc71;">
+              <span class="event-time">11:00</span>
+              <span class="event-title">Chemistry Webinar</span>
+            </div>
+          </div>
+          
+          <div class="calendar-date"><span class="date-number">23</span></div>
+          <div class="calendar-date"><span class="date-number">24</span></div>
+          <div class="calendar-date"><span class="date-number">25</span></div>
+          <div class="calendar-date"><span class="date-number">26</span></div>
+          <div class="calendar-date"><span class="date-number">27</span></div>
+          
+          <div class="calendar-date has-event">
+            <span class="date-number">28</span>
+            <div class="calendar-event" style="background-color: #9b59b6;">
+              <span class="event-time">15:00</span>
+              <span class="event-title">English Workshop</span>
+            </div>
+            <div class="calendar-event" style="background-color: #f39c12;">
+              <span class="event-time">18:00</span>
+              <span class="event-title">Study Group</span>
+            </div>
+          </div>
+          
+          <div class="calendar-date"><span class="date-number">29</span></div>
+          <div class="calendar-date"><span class="date-number">30</span></div>
+          <div class="calendar-date"><span class="date-number">31</span></div>
+          
+          <!-- Next month dates (greyed out) -->
+          <div class="calendar-date next-month"><span class="date-number">1</span></div>
+          <div class="calendar-date next-month"><span class="date-number">2</span></div>
+          <div class="calendar-date next-month"><span class="date-number">3</span></div>
+          <div class="calendar-date next-month"><span class="date-number">4</span></div>
+        </div>
+        
+        <div class="calendar-legend">
+          <div class="legend-item">
+            <span class="legend-color" style="background-color: #e74c3c;"></span>
+            <span>Workshops</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" style="background-color: #2ecc71;"></span>
+            <span>Webinars</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" style="background-color: #3498db;"></span>
+            <span>Exams</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" style="background-color: #f39c12;"></span>
+            <span>Study Groups</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" style="background-color: #9b59b6;"></span>
+            <span>Special Events</span>
+          </div>
+        </div>
+        
+        <div class="upcoming-events-preview">
+          <h4>Upcoming Events</h4>
+          <div class="event-preview">
+            <div class="event-preview-date">
+              <span class="event-month">MAR</span>
+              <span class="event-day">15</span>
+            </div>
+            <div class="event-preview-details">
+              <h5>Physics Revision Workshop</h5>
+              <p><i class="fas fa-clock"></i> 14:30 - 16:30</p>
+              <p><i class="fas fa-map-marker-alt"></i> Online (Zoom)</p>
+            </div>
+          </div>
+          <div class="event-preview">
+            <div class="event-preview-date">
+              <span class="event-month">MAR</span>
+              <span class="event-day">22</span>
+            </div>
+            <div class="event-preview-details">
+              <h5>Chemistry Lab Techniques Webinar</h5>
+              <p><i class="fas fa-clock"></i> 11:00 - 12:30</p>
+              <p><i class="fas fa-map-marker-alt"></i> Online (Teams)</p>
+            </div>
+          </div>
+          <a href="#events" class="btn btn-sm">View All Events</a>
+        </div>
+      </div>
+    </section>
+    
+    <section id="resources" class="fade-in">
+      <div class="section-title">
+        <h2>Learning Resources</h2>
+      </div>
+      <div class="subject-grid">
+        <div class="subject-card animated">
+          <div class="card-header">
+            <h3>Study Materials</h3>
+            <i class="fas fa-book-open"></i>
+          </div>
+          <div class="card-content">
+            <p>Access comprehensive textbooks, digital notes, and syllabus-aligned materials.</p>
+          </div>
+          <div class="card-footer">
+            <a href="materials.html" class="explore-btn">View All</a>
+            <span class="resource-badge">45+ Items</span>
+          </div>
+        </div>
+        
+        <div class="subject-card animated">
+          <div class="card-header">
+            <h3>Past Papers</h3>
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <div class="card-content">
+            <p>Practice with authentic past examination papers with detailed mark schemes.</p>
+          </div>
+          <div class="card-footer">
+            <a href="papers.html" class="explore-btn">View All</a>
+            <span class="resource-badge">200+ Papers</span>
+          </div>
+        </div>
+        
+        <div class="subject-card animated">
+          <div class="card-header">
+            <h3>Video Tutorials</h3>
+            <i class="fas fa-video"></i>
+          </div>
+          <div class="card-content">
+            <p>Watch expert explanations of complex topics with visual demonstrations.</p>
+          </div>
+          <div class="card-footer">
+            <a href="videos.html" class="explore-btn">View All</a>
+            <span class="resource-badge">120+ Videos</span>
+          </div>
+        </div>
+        
+        <div class="subject-card animated">
+          <div class="card-header">
+            <h3>Revision Guides</h3>
+            <i class="fas fa-clipboard-check"></i>
+          </div>
+          <div class="card-content">
+            <p>Concise summaries of key concepts and formulas for effective revision.</p>
+          </div>
+          <div class="card-footer">
+            <a href="revision.html" class="explore-btn">View All</a>
+            <span class="resource-badge">30+ Guides</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="newsletter fade-in">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to our newsletter to receive the latest study resources, exam tips, and event notifications.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
+    
+    <section id="about" class="fade-in">
+      <div class="section-title">
+        <h2>About Our Study Guide</h2>
+      </div>
+      <div class="hero">
+        <div class="hero-content">
+          <p>
+            The Cambridge AS & A Level Study Guide is designed to provide comprehensive support for students preparing for their examinations in the 2025-2026 academic year. Our team of experienced educators and examiners has created a wealth of resources aligned with the latest Cambridge syllabi.
+          </p>
+          <p>
+            Whether you're aiming for top grades or looking to strengthen your understanding of key concepts, our platform offers everything you need to succeed in your academic journey.
+          </p>
+          <a href="contact.html" class="btn">Contact Us</a>
+        </div>
+      </div>
+    </section>
   </div>
   
   <footer>
-    <p>&copy; 2025-2026 Cambridge International AS & A Level Study Guide. All rights reserved.</p>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Study Guide</h3>
+        <ul>
+          <li><a href="#subjects">Subjects</a></li>
+          <li><a href="#resources">Resources</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#about">About Us</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="papers.html">Past Papers</a></li>
+          <li><a href="revision.html">Revision Notes</a></li>
+          <li><a href="videos.html">Video Tutorials</a></li>
+          <li><a href="questions.html">Practice Questions</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+          <li><a href="terms.html">Terms of Use</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Connect With Us</h3>
+        <p>Follow us on social media for updates, study tips, and more.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Cambridge AS & A Level Study Guide. All Rights Reserved.</p>
+    </div>
   </footer>
+  
+  <a href="#" class="back-to-top" id="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+  
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+    
+    // Dark mode toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      
+      // Toggle icon
+      const icon = themeToggle.querySelector('i');
+      if (body.classList.contains('dark-mode')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      }
+    });
+    
+    // Back to top button
+    const backToTopBtn = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+    
+    backToTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Animation on scroll
+    const animatedElements = document.querySelectorAll('.animated');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeIn 1s forwards';
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    animatedElements.forEach(element => {
+      observer.observe(element);
+    });
+    
+    // Search functionality placeholder
+    const searchBtn = document.getElementById('search-btn');
+    
+    searchBtn.addEventListener('click', () => {
+      alert('Search functionality coming soon!');
+    });
+
+    // Calendar functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get all calendar dates
+      const calendarDates = document.querySelectorAll('.calendar-date:not(.prev-month):not(.next-month)');
+      
+      // Add click event to each date
+      calendarDates.forEach(date => {
+        date.addEventListener('click', function() {
+          // Toggle selected class
+          document.querySelectorAll('.calendar-date.selected').forEach(el => {
+            el.classList.remove('selected');
+          });
+          this.classList.add('selected');
+          
+          // Get the date number
+          const dateNumber = this.querySelector('.date-number').textContent;
+          
+          // Show a notification for this action (for demonstration)
+          if (this.classList.contains('has-event')) {
+            const eventTitles = Array.from(this.querySelectorAll('.calendar-event .event-title'))
+              .map(el => el.textContent)
+              .join(', ');
+            alert(`Events on March ${dateNumber}: ${eventTitles}`);
+          } else {
+            alert(`No events scheduled for March ${dateNumber}.`);
+          }
+        });
+      });
+      
+      // Month navigation buttons (for demonstration)
+      const prevMonthBtn = document.querySelector('.month-selector button:first-child');
+      const nextMonthBtn = document.querySelector('.month-selector button:last-child');
+      
+      prevMonthBtn.addEventListener('click', function() {
+        alert('This would navigate to February 2025');
+      });
+      
+      nextMonthBtn.addEventListener('click', function() {
+        alert('This would navigate to April 2025');
+      });
+      
+      // Calendar view buttons
+      const viewButtons = document.querySelectorAll('.calendar-btn');
+      viewButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          viewButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          
+          if (this.textContent === 'Week') {
+            alert('Week view is not implemented yet.');
+          } else if (this.textContent === 'Today') {
+            alert('Today view is not implemented yet.');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
+ 
+    
+ 
